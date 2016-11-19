@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/book" xmlns:tns="http://www.example.org/book" elementFormDefault="qualified">
+	<!-- 
+		1.所有的schema文件都需要有一个id,在这里是targetNamespace,uri形式,其值很可能不存在. 
+		2.xmlns,引入一个schema约束,其值是targetNamespace的值
+	-->
+	<element name="bookshelf">
+		<complexType>
+			<sequence maxOccurs="unbounded">
+				<element name="book">
+					<complexType>
+						<sequence>
+							<element name="author" type="string"></element>
+							<element name="name" type="string"></element>
+							<element name="time" type="date"></element>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

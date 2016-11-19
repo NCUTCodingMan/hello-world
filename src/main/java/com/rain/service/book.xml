@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookshelf xmlns="http://www.example.org/book" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/book book.xsd ">
+  <!-- 
+  	xmlns引入schema约束,可以对该约束起别名,如xmlns:tns
+  	schemaLocation,明确引入的schema约束的位置;但是该属性实在 http://www.w3.org/2001/XMLSchema-instance中定义的
+  	所以需要引入该schema约束,并且为其使用一个别名
+  -->
+  <book>
+    <author>tns:author</author>
+    <name>tns:name</name>
+    <time>2001-01-01</time>
+  </book>
+</bookshelf>
