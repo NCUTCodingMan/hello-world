@@ -7,5 +7,7 @@ public class PathDispacther{
 		PathDispatcher pd = new PathDispatcher();
 		pd.setI(1);
 		System.out.println(".......");
+
+		System.out.println("真的会存在冲突吗?");
 	}
 }
