@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://impl.service.rain.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://impl.service.rain.com/"
+	name="FactoryServiceImplService">
+	<types>
+		<!-- 引入schema约束,此处并没有显示xsd文件中定义的数据类型 -->
+		<xsd:schema>
+			<xsd:import namespace="http://impl.service.rain.com/"
+				schemaLocation="http://127.0.0.1:8080/factoryService?xsd=1" />
+		</xsd:schema>
+	</types>
+	
+	<!-- 
+		对于一个web service请求而言,有一个请求消息,一个响应消息
+		massage用于指定消息类型
+			part:指定引用types中定义的标签片段
+			element定义元素是其引入selectMaxAgeStudent
+	-->
+	<message name="selectMaxAgeStudent">
+		<part name="parameters" element="tns:selectMaxAgeStudent" />
+	</message>
+	<message name="selectMaxAgeStudentResponse">
+		<part name="parameters" element="tns:selectMaxAgeStudentResponse" />
+	</message>
+	<message name="selectMaxLongNameStudent">
+		<part name="parameters" element="tns:selectMaxLongNameStudent" />
+	</message>
+	<message name="selectMaxLongNameStudentResponse">
+		<part name="parameters" element="tns:selectMaxLongNameStudentResponse" />
+	</message>
+	
+	<!-- 
+		portType与服务器端的SEI接口(接口名称)对应
+			operation:用于指定SEI处理请求的方法
+			input:用于指定客户端传递过来的数据,引用message中指定的元素
+			output:用户指定服务器端返回给客户端的数据,引用message中指定的元素
+	 -->
+	<portType name="FactoryServiceImpl">
+		<operation name="selectMaxAgeStudent">
+			<input
+				wsam:Action="http://impl.service.rain.com/FactoryServiceImpl/selectMaxAgeStudentRequest"
+				message="tns:selectMaxAgeStudent" />
+			<output
+				wsam:Action="http://impl.service.rain.com/FactoryServiceImpl/selectMaxAgeStudentResponse"
+				message="tns:selectMaxAgeStudentResponse" />
+		</operation>
+		<operation name="selectMaxLongNameStudent">
+			<input
+				wsam:Action="http://impl.service.rain.com/FactoryServiceImpl/selectMaxLongNameStudentRequest"
+				message="tns:selectMaxLongNameStudent" />
+			<output
+				wsam:Action="http://impl.service.rain.com/FactoryServiceImpl/selectMaxLongNameStudentResponse"
+				message="tns:selectMaxLongNameStudentResponse" />
+		</operation>
+	</portType>
+	
+	<!-- 
+		binding:用于定义SEI的实现类
+			type:引用上面定义的portType
+				<soap:style="document"/>:绑定的数据是一个document(xml)
+			operation:用于定义实现的方法
+				<soap:style="document"/>:绑定的数据是一个document(xml)
+				input:客户端传递的数据
+					<soap:body use="literal" />:文本数据
+				output:服务器端传递给客户端的数据
+					<soap:body use="literal" />:文本数据
+	 -->
+	<binding name="FactoryServiceImplPortBinding" type="tns:FactoryServiceImpl">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<operation name="selectMaxAgeStudent">
+			<soap:operation soapAction="" style="document"/>
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="selectMaxLongNameStudent">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+	<!-- 
+		service:Service容器(工厂),用来生成SEI接口的容器
+			name:用于指定客户端容器类
+			port:用于指定服务器端处理请求的入口
+			binding:引用上面定义的binding
+			address:当前web service的请求地址
+	 -->
+	<service name="FactoryServiceImplService">
+		<port name="FactoryServiceImplPort" binding="tns:FactoryServiceImplPortBinding">
+			<soap:address location="http://127.0.0.1:8080/factoryService" />
+		</port>
+	</service>
+</definitions>
