@@ -1,5 +1,7 @@
 package com.rain.thread;
 
+import java.util.ArrayList;
+
 /**
  * 关于synchronized,关键是对谁上锁
  * */

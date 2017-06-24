@@ -1,5 +1,7 @@
 package com.rain.collection;
 
+import java.util.Arrays;
+
 public class CustomLinkedList {
 	private CustomLinkedList next;
 	private int data;
@@ -44,5 +46,7 @@ public class CustomLinkedList {
 			System.out.print(header.data + "\t");
 			header = header.next;
 		}
+		
+		System.out.println(Arrays.asList(new int[][]{{1,22,3},{12,2,2}}));
 	}
 }
